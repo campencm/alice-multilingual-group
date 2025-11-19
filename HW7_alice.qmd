@@ -2,4 +2,3 @@
 title: "HW7_alice"
 format: html
 ---
-
