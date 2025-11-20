@@ -1,6 +1,6 @@
 # alice-multilingual-group
 
-Member Names: Kendal Smith, Cj Campen, Lexi Hayes
+Member Names: Kendal Smith, Cj Campen, Lexie Hayes
 
 Languages Analysed: English, Spanish, Finnish, Italian
 
