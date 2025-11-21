@@ -4,6 +4,8 @@ IMPORTANT:
 - Make sure push/pull says 'everything up to date' before continuing to work
 - If you're going to work on any shared files (e.g. HW7_alice.qmd), make sure
 you let everyone know so that we don't run into any issues with pushing/pulling!
+  - If multiple people are working on the same doc at the same time, it messes
+    up.
 - If you want to work in said shared files, check to make sure someone else
 isn't first!
 
