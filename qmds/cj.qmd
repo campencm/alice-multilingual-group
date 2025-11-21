@@ -14,6 +14,9 @@ import nltk
 nltk.download('wordnet')
 
 nlp = spacy.load("en_core_web_sm")
+nlp = spacy.load("it_core_news_sm")
+nlp = spacy.load("fi_core_news_sm")
+nlp = spacy.load("es_core_news_sm")
 
 ```
 
@@ -71,5 +74,24 @@ ita_doc = nlp(ita)
 
 ita_lemmas = [(t.lemma_.lower(), t.pos_) for t in ita_doc
                   if not (t.is_stop or t.is_punct or t.is_space or t.like_num)]
-ita_lemmas
+```
+
+```{python}
+#Finnish lemmas
+nlp = spacy.load("fi_core_news_sm")
+
+fin_doc = nlp(fin)
+
+fin_lemmas = [(t.lemma_.lower(), t.pos_) for t in fin_doc
+                  if not (t.is_stop or t.is_punct or t.is_space or t.like_num)]
+```
+
+```{python}
+#Spanish lemmas
+nlp = spacy.load("es_core_news_sm")
+
+spa_doc = nlp(spa)
+
+spa_lemmas = [(t.lemma_.lower(), t.pos_) for t in spa_doc
+                  if not (t.is_stop or t.is_punct or t.is_space or t.like_num)]
 ```
