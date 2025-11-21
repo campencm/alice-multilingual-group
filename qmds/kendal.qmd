@@ -13,7 +13,9 @@ import nltk
 
 nltk.download('wordnet')
 
-nlp = spacy.load("en_core_web_sm")
+eng_nlp = spacy.load("en_core_web_sm")
+
+spa_nlp = spacy.load("es_core_news_sm")
 
 ```
 
@@ -23,13 +25,16 @@ def read_book(path):
       return f.read()
   
 eng = read_book("../data/english_alice.txt")
+spa = read_book("../data/spanish_alice.txt")
 print(eng[:200])
+print(spa[:200])
 ```
 
 ```{python}
-nlp = spacy.load("en_core_web_sm")
+#Step 1 English
+eng_nlp = spacy.load("en_core_web_sm")
 
-eng_doc = nlp(eng)
+eng_doc = eng_nlp(eng)
 
 eng_lemmas = [(t.lemma_.lower(), t.pos_) for t in eng_doc
                   if not (t.is_stop or t.is_punct or t.is_space or t.like_num)]
@@ -37,18 +42,46 @@ eng_lemmas = [(t.lemma_.lower(), t.pos_) for t in eng_doc
 #data frame
 
 #defining columns variables
-language = "english"
-freq = Counter(eng_lemmas)
+eng_language = "english"
 total_eng_tokens = len(eng_doc)
 eng_lemmas_count = len(eng_lemmas)
 eng_div = eng_lemmas_count / total_eng_tokens
-sentence_count = len(list(eng_doc.sents))
+eng_sentence_count = len(list(eng_doc.sents))
 
 #English DF 
-df_freq = pd.DataFrame(
-    [(language, total_eng_tokens, eng_div, sentence_count)],
+eng_df_freq = pd.DataFrame(
+    [(eng_language, total_eng_tokens, eng_div, eng_sentence_count)],
     columns=["language", "token count", "diversity", "sentence count"]
 )
 
-print(df_freq.head(11))
+print(eng_df_freq)
+```
+
+```{python}
+
+#Step 1 Spanish
+spa_nlp = spacy.load("es_core_news_sm")
+
+spa_doc = spa_nlp(spa)
+
+spa_lemmas = [(t.lemma_.lower(), t.pos_) for t in spa_doc
+                  if not (t.is_stop or t.is_punct or t.is_space or t.like_num)]
+                  
+#data frame
+
+#defining columns variables
+spa_language = "spanish"
+spa_freq = Counter(spa_lemmas)
+total_spa_tokens = len(spa_doc)
+spa_lemmas_count = len(spa_lemmas)
+spa_div = spa_lemmas_count / total_spa_tokens
+spa_sentence_count = len(list(spa_doc.sents))
+
+#English DF 
+spa_df_freq = pd.DataFrame(
+    [(spa_language, total_spa_tokens, spa_div, spa_sentence_count)],
+    columns=["language", "token count", "diversity", "sentence count"]
+)
+
+print(spa_df_freq)
 ```
