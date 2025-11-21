@@ -6,6 +6,7 @@ format: html
 ```{python}
 #Packages, nlps, and docs 
 import spacy
+from spacy import displacy
 import pandas as pd
 from collections import Counter
 from nltk.corpus import wordnet as wn
