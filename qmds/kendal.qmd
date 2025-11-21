@@ -5,6 +5,7 @@ format: html
 
 ```{python}
 #Packages, nlps, and docs 
+#Packages, nlps, and docs 
 import spacy
 import pandas as pd
 from collections import Counter
@@ -20,10 +21,6 @@ spa_nlp = spacy.load("es_core_news_sm")
 ita_nlp = spacy.load("it_core_news_sm")
 fin_nlp = spacy.load("fi_core_news_sm")
 
-#Docs 
-eng_doc = eng_nlp(eng)
-spa_doc = spa_nlp(spa)
-
 
 ```
 
@@ -31,11 +28,30 @@ spa_doc = spa_nlp(spa)
 def read_book(path):
     with open(path, mode="r", encoding="utf-8") as f:
       return f.read()
-  
+
+#Open Books
 eng = read_book("../data/english_alice.txt")
 spa = read_book("../data/spanish_alice.txt")
-print(eng[:200])
-print(spa[:200])
+ita = read_book("../data/italian_alice.txt")
+fin = read_book("../data/finnish_alice.txt")
+
+#Docs 
+eng_doc = eng_nlp(eng)
+spa_doc = spa_nlp(spa)
+ita_doc = ita_nlp(ita)
+fin_doc = ita_nlp(fin)
+```
+
+```{python}
+#Lemma Variables
+eng_lemmas = [(t.lemma_.lower(), t.pos_) for t in eng_doc
+                  if not (t.is_stop or t.is_punct or t.is_space or t.like_num)]
+spa_lemmas = [(t.lemma_.lower(), t.pos_) for t in spa_doc
+                  if not (t.is_stop or t.is_punct or t.is_space or t.like_num)]
+fin_lemmas = [(t.lemma_.lower(), t.pos_) for t in fin_doc
+                  if not (t.is_stop or t.is_punct or t.is_space or t.like_num)]
+ita_lemmas = [(t.lemma_.lower(), t.pos_) for t in ita_doc
+                  if not (t.is_stop or t.is_punct or t.is_space or t.like_num)]
 ```
 
 ```{python}
@@ -74,7 +90,7 @@ spa_doc = spa_nlp(spa)
 
 spa_lemmas = [(t.lemma_.lower(), t.pos_) for t in spa_doc
                   if not (t.is_stop or t.is_punct or t.is_space or t.like_num)]
-                  
+
 #data frame
 
 #defining columns variables
