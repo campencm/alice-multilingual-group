@@ -11,13 +11,14 @@ from nltk.corpus import wordnet as wn
 import matplotlib.pyplot as plt
 import nltk
 from wordcloud import WordCloud
+import numpy as np
 
 nltk.download('wordnet')
 
-nlp = spacy.load("en_core_web_sm")
-nlp = spacy.load("it_core_news_sm")
-nlp = spacy.load("fi_core_news_sm")
-nlp = spacy.load("es_core_news_sm")
+eng_nlp = spacy.load("en_core_web_sm")
+ita_nlp = spacy.load("it_core_news_sm")
+fin_nlp = spacy.load("fi_core_news_sm")
+spa_nlp = spacy.load("es_core_news_sm")
 
 ```
 
@@ -59,7 +60,7 @@ spa = read_book("../data/spanish_alice.txt")
 
 ```{python}
 #English lemmas
-nlp = spacy.load("en_core_web_sm")
+eng_nlp = spacy.load("en_core_web_sm")
 
 eng_doc = nlp(eng)
 
@@ -69,7 +70,7 @@ eng_lemmas = [(t.lemma_.lower(), t.pos_) for t in eng_doc
 
 ```{python}
 #Italian lemmas
-nlp = spacy.load("it_core_news_sm")
+ita_nlp = spacy.load("it_core_news_sm")
 
 ita_doc = nlp(ita)
 
@@ -79,7 +80,7 @@ ita_lemmas = [(t.lemma_.lower(), t.pos_) for t in ita_doc
 
 ```{python}
 #Finnish lemmas
-nlp = spacy.load("fi_core_news_sm")
+fin_nlp = spacy.load("fi_core_news_sm")
 
 fin_doc = nlp(fin)
 
@@ -89,7 +90,7 @@ fin_lemmas = [(t.lemma_.lower(), t.pos_) for t in fin_doc
 
 ```{python}
 #Spanish lemmas
-nlp = spacy.load("es_core_news_sm")
+spa_nlp = spacy.load("es_core_news_sm")
 
 spa_doc = nlp(spa)
 
@@ -118,5 +119,15 @@ freq_spa = Counter(spa_lemmas)
 ```
 
 ```{python}
-
+wordcloud = WordCloud(
+       width=800,
+       height=400,
+       background_color='white',
+       min_font_size=10
+   ).generate(freq_eng)
+   
+plt.figure(figsize=(10, 5))
+   plt.imshow(wordcloud, interpolation='bilinear')
+   plt.axis('off')  # Turn off the axis labels
+   plt.show()
 ```
