@@ -1,5 +1,9 @@
-General notes/reminders/to dos:
+General notes:
 
+REMINDERS:
+- Make sure push/pull says 'everything up to date' before continuing to work
+
+To do:
 - Update README file to include all language packages (en_core_web_sm, etc.)
 
 
