@@ -8,5 +8,6 @@ To do:
 
 
 it_core_news_sm
+fi_core_news_sm
 
 kendal commit test
