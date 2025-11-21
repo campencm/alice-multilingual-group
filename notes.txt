@@ -4,3 +4,5 @@ General notes/reminders/to dos:
 
 
 it_core_news_sm
+
+kendal commit test
