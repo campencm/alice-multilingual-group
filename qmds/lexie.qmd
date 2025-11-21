@@ -85,3 +85,32 @@ ita_df_freq = pd.DataFrame(
 
 print(ita_df_freq)
 ```
+
+```{python}
+nlp = spacy.load("en_core_web_sm")
+
+doc = nlp("We considered the options and chose the best proposal.")
+pairs = []
+for tok in doc:
+    if tok.pos_ == "VERB":
+        dobj = [c for c in tok.children if c.dep_ == "dobj"]
+        if dobj:
+            pairs.append((tok.lemma_, dobj[0].text))
+pairs
+```
+
+## **3. Syntax patterns**
+
+```{python}
+import spacy
+
+fin_doc = fin_nlp(fin)
+
+fin_pairs = []
+for tok in fin_doc:
+    if tok.pos_ == "VERB":
+        dobj = [c for c in tok.children if c.dep_ == "obj" and c.text.lower() == "liisaa"]
+        if dobj:
+          fin_pairs.append((tok.lemma_, dobj[0].text))
+fin_pairs
+```
