@@ -119,3 +119,32 @@ df_freq = pd.DataFrame(
 
 print(df_freq.head(11))
 ```
+
+```{python}
+import spacy
+
+spa_doc = spa_nlp(spa)
+
+spa_pairs = []
+for tok in spa_doc:
+    if tok.pos_ == "VERB":
+        dobj = [c for c in tok.children if c.dep_ == "obj" and c.text.lower() == "alicia"]
+        if dobj:
+          spa_pairs.append((tok.lemma_, dobj[0].text))
+spa_pairs
+```
+
+```{python}
+import spacy
+
+nlp = spacy.load("en_core_web_sm")
+
+doc = nlp("We considered the options and chose the best proposal.")
+pairs = []
+for tok in doc:
+    if tok.pos_ == "VERB":
+        dobj = [c for c in tok.children if c.dep_ == "dobj" and c.dep_ == "alice"]
+        if dobj:
+            pairs.append((tok.lemma_, dobj[0].text))
+pairs
+```
