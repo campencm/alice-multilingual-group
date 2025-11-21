@@ -2,3 +2,23 @@
 title: "lexie"
 format: html
 ---
+
+## **1. Text Cleaning & Setup**
+
+Manually remove headers and footers. Then, load and clean all language files and tokenize using the appropriate spaCy pipeline for each language.
+
+Compute and compare basic corpus stats:
+
+-   total tokens
+
+-   unique lemmas
+
+-   lexical diversity (type-token ratio), which measures how *varied* the vocabulary is
+
+-   number of sentences
+
+Summarize these metrics in a small comparative table.
+
+```{python}
+
+```
