@@ -2,3 +2,130 @@
 title: "HW7_alice"
 format: html
 ---
+
+```{python}
+#Packages, nlps, and docs 
+import spacy
+import pandas as pd
+from collections import Counter
+from nltk.corpus import wordnet as wn
+import matplotlib.pyplot as plt
+import nltk
+
+nltk.download('wordnet')
+
+#language downloads
+eng_nlp = spacy.load("en_core_web_sm")
+spa_nlp = spacy.load("es_core_news_sm")
+ita_nlp = spacy.load("it_core_news_sm")
+fin_nlp = spacy.load("fi_core_news_sm")
+
+```
+
+```{python}
+def read_book(path):
+    with open(path, mode="r", encoding="utf-8") as f:
+      return f.read()
+
+#Open Books
+eng = read_book("data/english_alice.txt")
+spa = read_book("data/spanish_alice.txt")
+ita = read_book("data/italian_alice.txt")
+fin = read_book("data/finnish_alice.txt")
+
+#Docs 
+eng_doc = eng_nlp(eng)
+spa_doc = spa_nlp(spa)
+ita_doc = ita_nlp(ita)
+fin_doc = ita_nlp(fin)
+```
+
+```{python}
+#Lemma Variables
+eng_lemmas = [(t.lemma_.lower(), t.pos_) for t in eng_doc
+                  if not (t.is_stop or t.is_punct or t.is_space or t.like_num)]
+spa_lemmas = [(t.lemma_.lower(), t.pos_) for t in spa_doc
+                  if not (t.is_stop or t.is_punct or t.is_space or t.like_num)]
+fin_lemmas = [(t.lemma_.lower(), t.pos_) for t in fin_doc
+                  if not (t.is_stop or t.is_punct or t.is_space or t.like_num)]
+ita_lemmas = [(t.lemma_.lower(), t.pos_) for t in ita_doc
+                  if not (t.is_stop or t.is_punct or t.is_space or t.like_num)]
+                  
+```
+
+```{python}
+#Step 1 English
+                  
+#data frame
+
+#defining columns variables
+eng_language = "english"
+total_eng_tokens = len(eng_doc)
+eng_lemmas_count = len(eng_lemmas)
+eng_div = eng_lemmas_count / total_eng_tokens
+eng_sentence_count = len(list(eng_doc.sents))
+
+#English DF 
+eng_df_freq = pd.DataFrame(
+    [(eng_language, total_eng_tokens, eng_div, eng_sentence_count)],
+    columns=["language", "token count", "diversity", "sentence count"]
+)
+
+print(eng_df_freq)
+```
+
+```{python}
+#Step 1 Spanish df
+                
+
+#defining columns variables
+spa_language = "spanish"
+spa_freq = Counter(spa_lemmas)
+total_spa_tokens = len(spa_doc)
+spa_lemmas_count = len(spa_lemmas)
+spa_div = spa_lemmas_count / total_spa_tokens
+spa_sentence_count = len(list(spa_doc.sents))
+
+#English DF 
+spa_df_freq = pd.DataFrame(
+    [(spa_language, total_spa_tokens, spa_div, spa_sentence_count)],
+    columns=["language", "token count", "diversity", "sentence count"]
+)
+
+print(spa_df_freq)
+```
+
+```{python}
+#Step 1 Finnish df
+
+
+fin_language = "finnish"
+total_fin_tokens = len(fin_doc)
+fin_lemmas_count = len(fin_lemmas)
+fin_div = fin_lemmas_count / total_fin_tokens
+fin_sentence_count = len(list(fin_doc.sents))
+
+fin_df_freq = pd.DataFrame(
+    [(fin_language, total_fin_tokens, fin_div, fin_sentence_count)],
+    columns=["language", "token count", "diversity", "sentence count"]
+)
+
+print(fin_df_freq)
+```
+
+```{python}
+#Step 1 Italian df
+                  
+ita_language = "italian"
+total_ita_tokens = len(ita_doc)
+ita_lemmas_count = len(ita_lemmas)
+ita_div = ita_lemmas_count / total_ita_tokens
+ita_sentence_count = len(list(ita_doc.sents))
+
+ita_df_freq = pd.DataFrame(
+    [(ita_language, total_ita_tokens, ita_div, ita_sentence_count)],
+    columns=["language", "token count", "diversity", "sentence count"]
+)
+
+print(ita_df_freq)
+```
