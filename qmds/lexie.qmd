@@ -3,6 +3,15 @@ title: "lexie"
 format: html
 ---
 
+```{python}
+import spacy
+import pandas as pd
+from collections import Counter
+from nltk.corpus import wordnet as wn
+import matplotlib.pyplot as plt
+import nltk
+```
+
 ## **1. Text Cleaning & Setup**
 
 Manually remove headers and footers. Then, load and clean all language files and tokenize using the appropriate spaCy pipeline for each language.
