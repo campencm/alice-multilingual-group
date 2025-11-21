@@ -40,11 +40,12 @@ eng_lemmas = [(t.lemma_.lower(), t.pos_) for t in eng_doc
 language = "english"
 freq = Counter(eng_lemmas)
 total_eng_tokens = len(eng_doc)
-
+eng_lemmas_count = len(eng_lemmas)
+eng_div = eng_lemmas_count / total_eng_tokens
 
 df_freq = pd.DataFrame(
-    [(language, total_eng_tokens, lemma, pos, count) for (lemma, pos), count in freq.items()],
-    columns=["language", "token count", "lemma", "pos", "count"]
+    [(language, total_eng_tokens, eng_div, lemma, pos, count) for (lemma, pos), count in freq.items()],
+    columns=["language", "token count", "diversity", "lemma", "pos", "count"]
 ).sort_values("count", ascending=False)
 
 print(df_freq.head(11))
