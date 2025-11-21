@@ -9,6 +9,7 @@ isn't first!
 
 To do:
 - Update README file to include all language packages (en_core_web_sm, etc.)
+- At end of project: make master code block of all packages in main .qmd
 
 Language packages:
 - English: en_core_web_sm
