@@ -1,3 +1,3 @@
-General notes/reminders:
+General notes/reminders/to dos:
 
 - Update README file to include all language packages (en_core_web_sm, etc.)
