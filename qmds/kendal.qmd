@@ -13,6 +13,6 @@ def read_book(path):
     words = [word for line in clean_lines for word in line.split() if word]
     return words
 
-eng = read_book("english_alice.txt")
-print(alice[:200])
+eng = read_book("../data/english_alice.txt")
+print(eng[:200])
 ```
