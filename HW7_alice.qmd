@@ -86,7 +86,7 @@ spa_lemmas_count = len(spa_lemmas)
 spa_div = spa_lemmas_count / total_spa_tokens
 spa_sentence_count = len(list(spa_doc.sents))
 
-#English DF 
+#Spnaish DF 
 spa_df_freq = pd.DataFrame(
     [(spa_language, total_spa_tokens, spa_div, spa_sentence_count)],
     columns=["language", "token count", "diversity", "sentence count"]
@@ -128,4 +128,10 @@ ita_df_freq = pd.DataFrame(
 )
 
 print(ita_df_freq)
+```
+
+```{python}
+df_all_langs = pd.concat([eng_df_freq, fin_df_freq, ita_df_freq, spa_df_freq])
+
+df_all_langs
 ```
