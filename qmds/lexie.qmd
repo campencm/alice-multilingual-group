@@ -51,7 +51,6 @@ fin_doc = nlp(fin)
 content_lemmas = [(t.lemma_.lower(), t.pos_) for t in fin_doc
                   if not (t.is_stop or t.is_punct or t.is_space or t.like_num)]
                   
-#data frame
 freq = Counter(content_lemmas)
 df_freq = pd.DataFrame(
     [(lemma, pos, count) for (lemma, pos), count in freq.items()],
@@ -62,16 +61,11 @@ print(df_freq.head(11))
 ```
 
 ```{python}
-nlp = spacy.load("fi_core_news_sm")
-
 fin_doc = nlp(fin)
 
 fin_lemmas = [(t.lemma_.lower(), t.pos_) for t in fin_doc
                   if not (t.is_stop or t.is_punct or t.is_space or t.like_num)]
-                  
-#data frame
 
-#defining columns 
 language = "finnish"
 freq = Counter(fin_lemmas)
 total_fin_tokens = len(fin_doc)
