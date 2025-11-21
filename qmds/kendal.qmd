@@ -31,14 +31,20 @@ nlp = spacy.load("en_core_web_sm")
 
 eng_doc = nlp(eng)
 
-content_lemmas = [(t.lemma_.lower(), t.pos_) for t in eng_doc
+eng_lemmas = [(t.lemma_.lower(), t.pos_) for t in eng_doc
                   if not (t.is_stop or t.is_punct or t.is_space or t.like_num)]
                   
 #data frame
-freq = Counter(content_lemmas)
+
+#defining columns 
+language = "english"
+freq = Counter(eng_lemmas)
+total_eng_tokens = len(eng_doc)
+
+
 df_freq = pd.DataFrame(
-    [(lemma, pos, count) for (lemma, pos), count in freq.items()],
-    columns=["lemma", "pos", "count"]
+    [(language, total_eng_tokens, lemma, pos, count) for (lemma, pos), count in freq.items()],
+    columns=["language", "token count", "lemma", "pos", "count"]
 ).sort_values("count", ascending=False)
 
 print(df_freq.head(11))
