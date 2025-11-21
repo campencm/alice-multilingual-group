@@ -109,3 +109,13 @@ spa_df_freq = pd.DataFrame(
 
 print(spa_df_freq)
 ```
+
+```{python}
+freq = Counter(content_lemmas)
+df_freq = pd.DataFrame(
+    [(lemma, pos, count) for (lemma, pos), count in freq.items()],
+    columns=["lemma", "pos", "count"]
+).sort_values("count", ascending=False)
+
+print(df_freq.head(11))
+```
