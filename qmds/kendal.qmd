@@ -121,6 +121,7 @@ print(df_freq.head(11))
 ```
 
 ```{python}
+# Finding verbs with Alice 
 import spacy
 
 spa_doc = spa_nlp(spa)
@@ -129,9 +130,12 @@ spa_pairs = []
 for tok in spa_doc:
     if tok.pos_ == "VERB":
         dobj = [c for c in tok.children if c.dep_ == "obj" and c.text.lower() == "alicia"]
-        if dobj:
-          spa_pairs.append((tok.lemma_, dobj[0].text))
+        subj = [c for c in tok.children if c.dep_ == "subj" and c.text.lower() == "alicia"]
+        if dobj or subj:
+          spa_pairs.append((tok.lemma_, dobj[0].text or subj[0].text))
 spa_pairs
+
+
 ```
 
 ```{python}
