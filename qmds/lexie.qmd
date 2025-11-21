@@ -51,35 +51,14 @@ fin_doc = fin_nlp(fin)
 fin_lemmas = [(t.lemma_.lower(), t.pos_) for t in fin_doc
                   if not (t.is_stop or t.is_punct or t.is_space or t.like_num)]
                   
-language = "finnish"
-freq = Counter(fin_lemmas)
-total_fin_tokens = len(fin_doc)
-fin_lemmas_count = len(fin_lemmas)
-fin_div = fin_lemmas_count / total_fin_tokens
-
-fin_df_freq = pd.DataFrame(
-    [(language, total_fin_tokens, fin_div, lemma, pos, count) for (lemma, pos), count in freq.items()],
-    columns=["language", "token count", "diversity", "lemma", "pos", "count"]
-).sort_values("count", ascending=False)
-
-print(fin_df_freq.head(11))
-```
-
-```{python}
-fin_doc = fin_nlp(fin)
-
-fin_lemmas = [(t.lemma_.lower(), t.pos_) for t in fin_doc
-                  if not (t.is_stop or t.is_punct or t.is_space or t.like_num)]
-                  
-language = "finnish"
-freq = Counter(fin_lemmas)
+fin_language = "finnish"
 total_fin_tokens = len(fin_doc)
 fin_lemmas_count = len(fin_lemmas)
 fin_div = fin_lemmas_count / total_fin_tokens
 fin_sentence_count = len(list(fin_doc.sents))
 
 fin_df_freq = pd.DataFrame(
-    [(language, total_fin_tokens, fin_div, fin_sentence_count)],
+    [(fin_language, total_fin_tokens, fin_div, fin_sentence_count)],
     columns=["language", "token count", "diversity", "sentence count"]
 )
 
@@ -89,5 +68,30 @@ print(fin_df_freq)
 ## **Italian:**
 
 ```{python}
+def read_book(path):
+    with open(path, mode="r", encoding="utf-8") as f:
+      return f.read()
+  
+ita = read_book("../data/italian_alice.txt")
+print(ita[:200])
+```
 
+```{python}
+ita_doc = ita_nlp(ita)
+
+ita_lemmas = [(t.lemma_.lower(), t.pos_) for t in ita_doc
+                  if not (t.is_stop or t.is_punct or t.is_space or t.like_num)]
+                  
+ita_language = "italian"
+total_fin_tokens = len(ita_doc)
+ita_lemmas_count = len(ita_lemmas)
+ita_div = ita_lemmas_count / total_ita_tokens
+ita_sentence_count = len(list(ita_doc.sents))
+
+ita_df_freq = pd.DataFrame(
+    [(ita_language, total_ita_tokens, ita_div, ita_sentence_count)],
+    columns=["language", "token count", "diversity", "sentence count"]
+)
+
+print(ita_df_freq)
 ```
