@@ -31,13 +31,10 @@ Summarize these metrics in a small comparative table.
 
 ```{python}
 def read_book(path):
-    with open(path, mode="r", encoding="utf-8") as book_file:
-        book_lines = book_file.readlines()
-    clean_lines = [line.strip().lower() for line in book_lines]
-    
-    words = [word for line in clean_lines for word in line.split() if word]
-    return words
-
+    with open(path, mode="r", encoding="utf-8") as f:
+      return f.read()
+  
+  
 fin = read_book("../data/finnish_alice.txt")
 print(fin[:200])
 ```
