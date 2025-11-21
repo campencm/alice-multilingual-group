@@ -3,3 +3,73 @@ title: "cj"
 format: html
 ---
 
+```{python}
+import spacy
+import pandas as pd
+from collections import Counter
+from nltk.corpus import wordnet as wn
+import matplotlib.pyplot as plt
+import nltk
+
+nltk.download('wordnet')
+
+nlp = spacy.load("en_core_web_sm")
+
+```
+
+```{python}
+#English read book
+def read_book(path):
+    with open(path, mode="r", encoding="utf-8") as f:
+      return f.read()
+  
+eng = read_book("../data/english_alice.txt")
+```
+
+```{python}
+#Italian read book
+def read_book(path):
+    with open(path, mode="r", encoding="utf-8") as f:
+      return f.read()
+  
+ita = read_book("../data/italian_alice.txt")
+```
+
+```{python}
+#Finnish read book
+def read_book(path):
+    with open(path, mode="r", encoding="utf-8") as f:
+      return f.read()
+  
+fin = read_book("../data/finnish_alice.txt")
+```
+
+```{python}
+#Spanish read book
+def read_book(path):
+    with open(path, mode="r", encoding="utf-8") as f:
+      return f.read()
+  
+spa = read_book("../data/spanish_alice.txt")
+```
+
+```{python}
+#English lemmas
+nlp = spacy.load("en_core_web_sm")
+
+eng_doc = nlp(eng)
+
+eng_lemmas = [(t.lemma_.lower(), t.pos_) for t in eng_doc
+                  if not (t.is_stop or t.is_punct or t.is_space or t.like_num)]
+```
+
+```{python}
+#Italian lemmas
+nlp = spacy.load("it_core_news_sm")
+
+ita_doc = nlp(ita)
+
+ita_lemmas = [(t.lemma_.lower(), t.pos_) for t in ita_doc
+                  if not (t.is_stop or t.is_punct or t.is_space or t.like_num)]
+ita_lemmas
+```
