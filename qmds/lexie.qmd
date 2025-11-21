@@ -53,6 +53,7 @@ freq = Counter(fin_lemmas)
 total_fin_tokens = len(fin_doc)
 fin_lemmas_count = len(fin_lemmas)
 fin_div = fin_lemmas_count / total_fin_tokens
+sentence_count = 
 
 df_freq = pd.DataFrame(
     [(language, total_fin_tokens, fin_div, lemma, pos, count) for (lemma, pos), count in freq.items()],
@@ -60,4 +61,25 @@ df_freq = pd.DataFrame(
 ).sort_values("count", ascending=False)
 
 print(df_freq.head(11))
+```
+
+```{python}
+fin_doc = nlp(fin)
+
+fin_lemmas = [(t.lemma_.lower(), t.pos_) for t in fin_doc
+                  if not (t.is_stop or t.is_punct or t.is_space or t.like_num)]
+                  
+language = "finnish"
+freq = Counter(fin_lemmas)
+total_fin_tokens = len(fin_doc)
+fin_lemmas_count = len(fin_lemmas)
+fin_div = fin_lemmas_count / total_fin_tokens
+sentence_count = len(list(fin_doc.sents))
+
+df_freq = pd.DataFrame(
+    [(language, total_fin_tokens, fin_div, sentence_count)],
+    columns=["language", "token count", "diversity", "sentence count"]
+)
+
+print(df_freq)
 ```
