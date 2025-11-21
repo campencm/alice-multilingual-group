@@ -10,6 +10,7 @@ from collections import Counter
 from nltk.corpus import wordnet as wn
 import matplotlib.pyplot as plt
 import nltk
+from wordcloud import WordCloud
 
 nltk.download('wordnet')
 
@@ -94,4 +95,28 @@ spa_doc = nlp(spa)
 
 spa_lemmas = [(t.lemma_.lower(), t.pos_) for t in spa_doc
                   if not (t.is_stop or t.is_punct or t.is_space or t.like_num)]
+```
+
+```{python}
+#English top 20 lemmas
+freq_eng = Counter(eng_lemmas)
+```
+
+```{python}
+#Italian top 20 lemmas
+freq_ita = Counter(ita_lemmas)
+```
+
+```{python}
+#Finnish top 20 lemmas
+freq_fin = Counter(fin_lemmas)
+```
+
+```{python}
+#Spanish top 20 lemmas
+freq_spa = Counter(spa_lemmas)
+```
+
+```{python}
+
 ```
