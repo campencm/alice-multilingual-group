@@ -15,27 +15,15 @@ import nltk
 
 nltk.download('wordnet')
 
-fin_nlp = spacy.load("fi_core_news_sm")
+eng_nlp = spacy.load("en_core_web_sm")
+spa_nlp = spacy.load("es_core_news_sm")
 ita_nlp = spacy.load("it_core_news_sm")
+fin_nlp = spacy.load("fi_core_news_sm")
 ```
 
 ## **1. Text Cleaning & Setup**
 
-Manually remove headers and footers. Then, load and clean all language files and tokenize using the appropriate spaCy pipeline for each language.
-
-Compute and compare basic corpus stats:
-
--   total tokens
-
--   unique lemmas
-
--   lexical diversity (type-token ratio), which measures how *varied* the vocabulary is
-
--   number of sentences
-
-Summarize these metrics in a small comparative table.
-
-## **Finnish:**
+### **Finnish:**
 
 ```{python}
 def read_book(path):
@@ -66,7 +54,7 @@ fin_df_freq = pd.DataFrame(
 print(fin_df_freq)
 ```
 
-## **Italian:**
+### **Italian:**
 
 ```{python}
 def read_book(path):
