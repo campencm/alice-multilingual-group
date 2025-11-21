@@ -5,6 +5,7 @@ format: html
 
 ```{python}
 import spacy
+from spacy import displacy
 import pandas as pd
 from collections import Counter
 from nltk.corpus import wordnet as wn
@@ -62,72 +63,85 @@ spa = read_book("../data/spanish_alice.txt")
 #English lemmas
 eng_nlp = spacy.load("en_core_web_sm")
 
-eng_doc = nlp(eng)
+eng_doc = eng_nlp(eng)
 
-eng_lemmas = [(t.lemma_.lower(), t.pos_) for t in eng_doc
+eng_lemmas = [(t.lemma_.lower()) for t in eng_doc
                   if not (t.is_stop or t.is_punct or t.is_space or t.like_num)]
+                  
+#English Lemma Frequency
+freq_eng = Counter(eng_lemmas)
 ```
 
 ```{python}
 #Italian lemmas
 ita_nlp = spacy.load("it_core_news_sm")
 
-ita_doc = nlp(ita)
+ita_doc = ita_nlp(ita)
 
-ita_lemmas = [(t.lemma_.lower(), t.pos_) for t in ita_doc
+ita_lemmas = [(t.lemma_.lower()) for t in ita_doc
                   if not (t.is_stop or t.is_punct or t.is_space or t.like_num)]
+                  
+#Italian Lemma Frequency
+freq_ita = Counter(ita_lemmas)
 ```
 
 ```{python}
 #Finnish lemmas
 fin_nlp = spacy.load("fi_core_news_sm")
 
-fin_doc = nlp(fin)
+fin_doc = fin_nlp(fin)
 
-fin_lemmas = [(t.lemma_.lower(), t.pos_) for t in fin_doc
+fin_lemmas = [(t.lemma_.lower()) for t in fin_doc
                   if not (t.is_stop or t.is_punct or t.is_space or t.like_num)]
+                  
+#Finnish Lemma Frequency
+freq_fin = Counter(fin_lemmas)
 ```
 
 ```{python}
 #Spanish lemmas
 spa_nlp = spacy.load("es_core_news_sm")
 
-spa_doc = nlp(spa)
+spa_doc = spa_nlp(spa)
 
-spa_lemmas = [(t.lemma_.lower(), t.pos_) for t in spa_doc
+spa_lemmas = [(t.lemma_.lower()) for t in spa_doc
                   if not (t.is_stop or t.is_punct or t.is_space or t.like_num)]
-```
-
-```{python}
-#English top 20 lemmas
-freq_eng = Counter(eng_lemmas)
-```
-
-```{python}
-#Italian top 20 lemmas
-freq_ita = Counter(ita_lemmas)
-```
-
-```{python}
-#Finnish top 20 lemmas
-freq_fin = Counter(fin_lemmas)
-```
-
-```{python}
-#Spanish top 20 lemmas
+                  
+#Spanish Lemma Frequency
 freq_spa = Counter(spa_lemmas)
 ```
 
 ```{python}
-wordcloud = WordCloud(
-       width=800,
-       height=400,
-       background_color='white',
-       min_font_size=10
-   ).generate(freq_eng)
-   
+#English Top 20 Lemmas
+eng_df = pd.DataFrame(freq_eng.items(), columns=["Lemma", "Frequency"]).sort_values("Frequency", ascending=False)
+eng_df.head(20)
+```
+
+```{python}
+#Italian Top 20 Lemmas
+ita_df = pd.DataFrame(freq_ita.items(), columns=["Lemma", "Frequency"]).sort_values("Frequency", ascending=False)
+ita_df.head(20)
+```
+
+```{python}
+#Finnish Top 20 Lemmas
+fin_df = pd.DataFrame(freq_fin.items(), columns=["Lemma", "Frequency"]).sort_values("Frequency", ascending=False)
+fin_df.head(20)
+```
+
+```{python}
+#Spanish Top 20 Lemmas
+spa_df = pd.DataFrame(freq_spa.items(), columns=["Lemma", "Frequency"]).sort_values("Frequency", ascending=False)
+spa_df.head(20)
+```
+
+```{python}
+spa_cloud = WordCloud(width=800, height=400, background_color="white").generate(spa_df.head(20))
+
+
 plt.figure(figsize=(10, 5))
-   plt.imshow(wordcloud, interpolation='bilinear')
-   plt.axis('off')  # Turn off the axis labels
-   plt.show()
+plt.imshow(spa_cloud, interpolation="bilinear")
+plt.title("Spanish Alice Top 20 Lemmas")
+plt.axis("off")
+plt.show()
 ```
