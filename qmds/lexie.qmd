@@ -74,10 +74,10 @@ freq = Counter(fin_lemmas)
 total_fin_tokens = len(fin_doc)
 fin_lemmas_count = len(fin_lemmas)
 fin_div = fin_lemmas_count / total_fin_tokens
-sentence_count = len(list(fin_doc.sents))
+fin_sentence_count = len(list(fin_doc.sents))
 
 df_freq = pd.DataFrame(
-    [(language, total_fin_tokens, fin_div, sentence_count)],
+    [(language, total_fin_tokens, fin_div, fin_sentence_count)],
     columns=["language", "token count", "diversity", "sentence count"]
 )
 
