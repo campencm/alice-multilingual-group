@@ -22,17 +22,16 @@ def read_book(path):
     with open(path, mode="r", encoding="utf-8") as f:
       return f.read()
   
-  
 eng = read_book("../data/english_alice.txt")
 print(eng[:200])
 ```
 
 ```{python}
-
 nlp = spacy.load("en_core_web_sm")
+
 eng_doc = nlp(eng)
 
-content_lemmas = [(t.lemma_.lower(), t.pos_) for t in doc
+content_lemmas = [(t.lemma_.lower(), t.pos_) for t in eng_doc
                   if not (t.is_stop or t.is_punct or t.is_space or t.like_num)]
                   
 #data frame
