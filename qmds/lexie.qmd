@@ -14,7 +14,8 @@ import nltk
 
 nltk.download('wordnet')
 
-nlp = spacy.load("fi_core_news_sm")
+fin_nlp = spacy.load("fi_core_news_sm")
+ita_nlp = spacy.load("it_core_news_sm")
 ```
 
 ## **1. Text Cleaning & Setup**
@@ -33,6 +34,8 @@ Compute and compare basic corpus stats:
 
 Summarize these metrics in a small comparative table.
 
+## **Finnish:**
+
 ```{python}
 def read_book(path):
     with open(path, mode="r", encoding="utf-8") as f:
@@ -43,7 +46,7 @@ print(fin[:200])
 ```
 
 ```{python}
-fin_doc = nlp(fin)
+fin_doc = fin_nlp(fin)
 
 fin_lemmas = [(t.lemma_.lower(), t.pos_) for t in fin_doc
                   if not (t.is_stop or t.is_punct or t.is_space or t.like_num)]
@@ -53,18 +56,17 @@ freq = Counter(fin_lemmas)
 total_fin_tokens = len(fin_doc)
 fin_lemmas_count = len(fin_lemmas)
 fin_div = fin_lemmas_count / total_fin_tokens
-sentence_count = 
 
-df_freq = pd.DataFrame(
+fin_df_freq = pd.DataFrame(
     [(language, total_fin_tokens, fin_div, lemma, pos, count) for (lemma, pos), count in freq.items()],
     columns=["language", "token count", "diversity", "lemma", "pos", "count"]
 ).sort_values("count", ascending=False)
 
-print(df_freq.head(11))
+print(fin_df_freq.head(11))
 ```
 
 ```{python}
-fin_doc = nlp(fin)
+fin_doc = fin_nlp(fin)
 
 fin_lemmas = [(t.lemma_.lower(), t.pos_) for t in fin_doc
                   if not (t.is_stop or t.is_punct or t.is_space or t.like_num)]
@@ -76,10 +78,16 @@ fin_lemmas_count = len(fin_lemmas)
 fin_div = fin_lemmas_count / total_fin_tokens
 fin_sentence_count = len(list(fin_doc.sents))
 
-df_freq = pd.DataFrame(
+fin_df_freq = pd.DataFrame(
     [(language, total_fin_tokens, fin_div, fin_sentence_count)],
     columns=["language", "token count", "diversity", "sentence count"]
 )
 
-print(df_freq)
+print(fin_df_freq)
+```
+
+## **Italian:**
+
+```{python}
+
 ```
