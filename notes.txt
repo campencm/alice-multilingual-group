@@ -6,7 +6,9 @@ REMINDERS:
 To do:
 - Update README file to include all language packages (en_core_web_sm, etc.)
 
+Language packages:
+- English: en_core_web_sm
+- Italian: it_core_news_sm
+- Finnish: fi_core_news_sm
+- Spanish: es_core_news_sm
 
-it_core_news_sm
-
-kendal commit test
