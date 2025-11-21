@@ -3,9 +3,9 @@ title: "lexie"
 format: html
 ---
 
-```{python}
-# master package code block
+## **Master package code block:**
 
+```{python}
 import spacy
 import pandas as pd
 from collections import Counter
