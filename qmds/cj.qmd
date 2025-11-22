@@ -115,29 +115,92 @@ freq_spa = Counter(spa_lemmas)
 #English Top 20 Lemmas
 eng_df = pd.DataFrame(freq_eng.items(), columns=["Lemma", "Frequency"]).sort_values("Frequency", ascending=False)
 eng_df.head(20)
+
+#Convert into dict because WordCloud doesn't take dfs
+eng_dict = dict(zip(eng_df.head(20)["Lemma"], eng_df.head(20)["Frequency"]))
+eng_dict
 ```
 
 ```{python}
 #Italian Top 20 Lemmas
 ita_df = pd.DataFrame(freq_ita.items(), columns=["Lemma", "Frequency"]).sort_values("Frequency", ascending=False)
 ita_df.head(20)
+
+#Convert into dict because WordCloud doesn't take dfs
+ita_dict = dict(zip(ita_df.head(20)["Lemma"], ita_df.head(20)["Frequency"]))
+ita_dict
 ```
 
 ```{python}
 #Finnish Top 20 Lemmas
 fin_df = pd.DataFrame(freq_fin.items(), columns=["Lemma", "Frequency"]).sort_values("Frequency", ascending=False)
 fin_df.head(20)
+
+#Convert into dict because WordCloud doesn't take dfs
+fin_dict = dict(zip(fin_df.head(20)["Lemma"], fin_df.head(20)["Frequency"]))
 ```
 
 ```{python}
 #Spanish Top 20 Lemmas
 spa_df = pd.DataFrame(freq_spa.items(), columns=["Lemma", "Frequency"]).sort_values("Frequency", ascending=False)
 spa_df.head(20)
+
+#Convert into dict because WordCloud doesn't take dfs
+spa_dict = dict(zip(spa_df.head(20)["Lemma"], spa_df.head(20)["Frequency"]))
 ```
 
 ```{python}
-spa_cloud = WordCloud(width=800, height=400, background_color="white").generate(spa_df.head(20))
+#English WordCloud
+eng_cloud = WordCloud(
+    width=800,
+    height=400,
+    background_color="white"
+).generate_from_frequencies(eng_dict)
 
+plt.figure(figsize=(10, 5))
+plt.imshow(eng_cloud, interpolation="bilinear")
+plt.title("English Alice Top 20 Lemmas")
+plt.axis("off")
+plt.show()
+```
+
+```{python}
+#Italian WordCloud
+ita_cloud = WordCloud(
+    width=800,
+    height=400,
+    background_color="white"
+).generate_from_frequencies(ita_dict)
+
+plt.figure(figsize=(10, 5))
+plt.imshow(ita_cloud, interpolation="bilinear")
+plt.title("Italian Alice Top 20 Lemmas")
+plt.axis("off")
+plt.show()
+```
+
+```{python}
+#Finnish WordCloud
+fin_cloud = WordCloud(
+    width=800,
+    height=400,
+    background_color="white"
+).generate_from_frequencies(fin_dict)
+
+plt.figure(figsize=(10, 5))
+plt.imshow(fin_cloud, interpolation="bilinear")
+plt.title("Finnish Alice Top 20 Lemmas")
+plt.axis("off")
+plt.show()
+```
+
+```{python}
+#Spanish WordCloud
+spa_cloud = WordCloud(
+    width=800,
+    height=400,
+    background_color="white"
+).generate_from_frequencies(spa_dict)
 
 plt.figure(figsize=(10, 5))
 plt.imshow(spa_cloud, interpolation="bilinear")
