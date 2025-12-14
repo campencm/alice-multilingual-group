@@ -66,6 +66,7 @@ eng_doc = eng_nlp(eng)
 
 eng_lemmas = [(t.lemma_.lower()) for t in eng_doc
                   if not (t.is_stop or t.is_punct or t.is_space or t.like_num)]
+eng_lemmas
                   
 #English Lemma Frequency
 freq_eng = Counter(eng_lemmas)
@@ -79,6 +80,7 @@ ita_doc = ita_nlp(ita)
 
 ita_lemmas = [(t.lemma_.lower()) for t in ita_doc
                   if not (t.is_stop or t.is_punct or t.is_space or t.like_num)]
+ita_lemmas
                   
 #Italian Lemma Frequency
 freq_ita = Counter(ita_lemmas)
@@ -92,6 +94,7 @@ fin_doc = fin_nlp(fin)
 
 fin_lemmas = [(t.lemma_.lower()) for t in fin_doc
                   if not (t.is_stop or t.is_punct or t.is_space or t.like_num)]
+fin_lemmas
                   
 #Finnish Lemma Frequency
 freq_fin = Counter(fin_lemmas)
@@ -105,6 +108,7 @@ spa_doc = spa_nlp(spa)
 
 spa_lemmas = [(t.lemma_.lower()) for t in spa_doc
                   if not (t.is_stop or t.is_punct or t.is_space or t.like_num)]
+spa_lemmas
                   
 #Spanish Lemma Frequency
 freq_spa = Counter(spa_lemmas)
@@ -206,4 +210,8 @@ plt.imshow(spa_cloud, interpolation="bilinear")
 plt.title("Spanish Alice Top 20 Lemmas")
 plt.axis("off")
 plt.show()
+```
+
+```{python}
+#Part 4: Picking Lemmas
 ```
