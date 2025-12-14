@@ -268,3 +268,104 @@ plt.title("Spanish Alice Top 20 Lemmas")
 plt.axis("off")
 plt.show()
 ```
+
+```{python}
+# Step 3 Finding Verbs
+
+#English
+eng_pairs = []
+for tok in eng_doc:
+    if tok.pos_ == "VERB":
+        dobj = [c for c in tok.children if c.dep_ == "dobj" and c.text.lower() == "alice"]
+        subj = [c for c in tok.children if c.dep_ == "subj" and c.text.lower() == "alice"]
+        if dobj or subj:
+          eng_pairs.append((tok.lemma_, dobj[0].text or subj[0].text))
+
+# English pair df
+
+first_eng_verb = [item[0] for item in eng_pairs]
+
+eng_verb_counts = Counter(first_eng_verb)
+
+eng_verb_df = (
+    pd.DataFrame(eng_verb_counts.items(), columns=["Verb", "Frequency"])
+      .sort_values("Frequency", ascending=False)
+      .head(5)
+)
+
+#Spanish
+
+spa_doc = spa_nlp(spa)
+
+spa_pairs = []
+for tok in spa_doc:
+    if tok.pos_ == "VERB":
+        dobj = [c for c in tok.children if c.dep_ == "obj" and c.text.lower() == "alicia"]
+        subj = [c for c in tok.children if c.dep_ == "subj" and c.text.lower() == "alicia"]
+        if dobj or subj:
+          spa_pairs.append((tok.lemma_, dobj[0].text or subj[0].text))
+
+# df
+
+first_spa_verb = [item[0] for item in spa_pairs]
+
+spa_verb_counts = Counter(first_spa_verb)
+
+spa_verb_df = (
+    pd.DataFrame(spa_verb_counts.items(), columns=["Verb", "Frequency"])
+      .sort_values("Frequency", ascending=False)
+      .head(5)
+)
+
+#Finnish
+
+fin_doc = fin_nlp(fin)
+
+fin_pairs = []
+for tok in fin_doc:
+    if tok.pos_ == "VERB":
+        dobj = [c for c in tok.children if c.dep_ == "obj" and c.text.lower() == "liisaa"]
+        if dobj:
+          fin_pairs.append((tok.lemma_, dobj[0].text))
+
+# df 
+
+first_fin_verb = [item[0] for item in fin_pairs]
+
+fin_verb_counts = Counter(first_fin_verb)
+
+fin_verb_df = (
+    pd.DataFrame(fin_verb_counts.items(), columns=["Verb", "Frequency"])
+      .sort_values("Frequency", ascending=False)
+      .head(5)
+)
+
+#Italian
+
+ita_doc = ita_nlp(ita)
+
+ita_pairs = []
+for tok in ita_doc:
+    if tok.pos_ == "VERB":
+        dobj = [c for c in tok.children if c.dep_ == "obj" and c.text.lower() == "alice"]
+        if dobj:
+          ita_pairs.append((tok.lemma_, dobj[0].text))
+
+# df
+
+first_ita_verb = [item[0] for item in ita_pairs]
+
+ita_verb_counts = Counter(first_ita_verb)
+
+ita_verb_df = (
+    pd.DataFrame(ita_verb_counts.items(), columns=["Verb", "Frequency"])
+      .sort_values("Frequency", ascending=False)
+      .head(5)
+)
+
+#Final df
+
+verb_summary_df = pd.concat([spa_verb_df, eng_verb_df, fin_verb_df, ita_verb_df], axis=0)
+
+verb_summary_df
+```
