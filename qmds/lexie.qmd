@@ -73,7 +73,7 @@ ita_lemmas = [(t.lemma_.lower(), t.pos_) for t in ita_doc
                   if not (t.is_stop or t.is_punct or t.is_space or t.like_num)]
                   
 ita_language = "italian"
-total_fin_tokens = len(ita_doc)
+total_ita_tokens = len(ita_doc)
 ita_lemmas_count = len(ita_lemmas)
 ita_div = ita_lemmas_count / total_ita_tokens
 ita_sentence_count = len(list(ita_doc.sents))
@@ -113,4 +113,18 @@ for tok in fin_doc:
         if dobj:
           fin_pairs.append((tok.lemma_, dobj[0].text))
 fin_pairs
+```
+
+```{python}
+import spacy
+
+ita_doc = ita_nlp(ita)
+
+ita_pairs = []
+for tok in ita_doc:
+    if tok.pos_ == "VERB":
+        dobj = [c for c in tok.children if c.dep_ == "obj" and c.text.lower() == "alice"]
+        if dobj:
+          ita_pairs.append((tok.lemma_, dobj[0].text))
+ita_pairs
 ```
