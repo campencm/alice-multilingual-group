@@ -121,7 +121,7 @@ print(df_freq.head(11))
 ```
 
 ```{python}
-# Finding verbs with Alice 
+# Finding verbs with Alice in spanish
 import spacy
 
 spa_doc = spa_nlp(spa)
@@ -135,24 +135,41 @@ for tok in spa_doc:
           spa_pairs.append((tok.lemma_, dobj[0].text or subj[0].text))
 spa_pairs
 
+#make a df
+
+first_spa_verb = [item[0] for item in spa_pairs]
+
+spa_verb_counts = Counter(first_spa_verb)
+
+spa_verb_df = (
+    pd.DataFrame(spa_verb_counts.items(), columns=["Lemma", "Frequency"])
+      .sort_values("Frequency", ascending=False)
+)
+
+spa_verb_df.head(5)
 
 ```
 
 ```{python}
+# Alice verbs English
 import spacy
 
-nlp = spacy.load("en_core_web_sm")
+eng_doc = eng_nlp(eng)
 
-doc = nlp("We considered the options and chose the best proposal.")
-pairs = []
-for tok in doc:
+eng_pairs = []
+for tok in eng_doc:
     if tok.pos_ == "VERB":
-        dobj = [c for c in tok.children if c.dep_ == "dobj" and c.dep_ == "alice"]
-        if dobj:
-            pairs.append((tok.lemma_, dobj[0].text))
-pairs
+        dobj = [c for c in tok.children if c.dep_ == "dobj" and c.text.lower() == "alice"]
+        subj = [c for c in tok.children if c.dep_ == "subj" and c.text.lower() == "alice"]
+        if dobj or subj:
+          eng_pairs.append((tok.lemma_, dobj[0].text or subj[0].text))
+eng_pairs
+
+
+
 ```
 
 ```{python}
-test test
+
+
 ```
