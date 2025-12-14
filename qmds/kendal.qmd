@@ -165,6 +165,18 @@ for tok in eng_doc:
           eng_pairs.append((tok.lemma_, dobj[0].text or subj[0].text))
 eng_pairs
 
+#make a df
+
+first_eng_verb = [item[0] for item in eng_pairs]
+
+eng_verb_counts = Counter(first_eng_verb)
+
+eng_verb_df = (
+    pd.DataFrame(eng_verb_counts.items(), columns=["Lemma", "Frequency"])
+      .sort_values("Frequency", ascending=False)
+)
+
+eng_verb_df.head(5)
 
 
 ```
