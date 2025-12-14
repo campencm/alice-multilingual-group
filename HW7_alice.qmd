@@ -12,6 +12,7 @@ from collections import Counter
 from nltk.corpus import wordnet as wn
 import matplotlib.pyplot as plt
 import nltk
+from wordcloud import WordCloud
 
 nltk.download('wordnet')
 
