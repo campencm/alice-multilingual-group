@@ -244,3 +244,63 @@ verb_summary_df = pd.concat([spa_verb_df, eng_verb_df, fin_verb_df, ita_verb_df]
 
 verb_summary_df
 ```
+
+```{python}
+#Spanish Adjectives finding
+
+spa_doc = spa_nlp(spa)
+
+spa_adj_pairs = []
+
+for tok in spa_doc:
+    if tok.text.lower() == "alicia":
+        adjs = [c for c in tok.children if c.dep_ == "amod" and c.pos_ == "ADJ"]
+        for adj in adjs:
+            spa_adj_pairs.append((adj.lemma_, tok.text))
+
+
+#df 
+
+first_spa_adj = [item[0] for item in spa_adj_pairs]
+
+spa_adj_counts = Counter(first_spa_adj)
+
+spa_adj_df = (
+    pd.DataFrame(spa_adj_counts.items(), columns=["Adj", "Frequency"])
+      .sort_values("Frequency", ascending=False)
+      .head(5)
+)
+
+spa_adj_df
+
+```
+
+```{python}
+#English Adjectives 
+
+eng_doc = eng_nlp(eng)
+
+eng_adj_pairs = []
+
+for tok in eng_doc:
+    if tok.text.lower() == "alice":
+        adjs = [c for c in tok.children if c.dep_ == "amod" and c.pos_ == "ADJ"]
+        for adj in adjs:
+            eng_adj_pairs.append((adj.lemma_, tok.text))
+
+
+#df 
+
+first_eng_adj = [item[0] for item in eng_adj_pairs]
+
+eng_adj_counts = Counter(first_eng_adj)
+
+eng_adj_df = (
+    pd.DataFrame(eng_adj_counts.items(), columns=["Adj", "Frequency"])
+      .sort_values("Frequency", ascending=False)
+      .head(5)
+)
+
+eng_adj_df
+
+```
