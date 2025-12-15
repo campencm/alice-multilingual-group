@@ -214,4 +214,12 @@ plt.show()
 
 ```{python}
 #Part 4: Picking Lemmas
+
+eng_nouns = ["rabbit", "key", "duchess", "cat", "tea"]
+
+ita_nouns = ["coniglio", "chiave", "duchessa", "gatto", "tè"]
+
+fin_nouns = ["kani", "avain", "herttuatar", "kissa", "tee"]
+
+spa_nouns = ["conejo", "llave", "duquesa", "gato", "té"]
 ```
