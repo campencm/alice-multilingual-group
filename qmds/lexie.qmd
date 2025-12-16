@@ -128,3 +128,15 @@ for tok in ita_doc:
           ita_pairs.append((tok.lemma_, dobj[0].text))
 ita_pairs
 ```
+
+## 4. Semantics and WordNet
+
+```{python}
+eng_verbs = ["run", "say", "feel", "look", "think"]
+
+fin_verbs = ["juosta", "sanoa", "", "katso", "ajatella"]
+
+spa_verbs = ["correr", "decir", "sentir", "mirar", "pensar"]
+
+ita_verbs = ["correre", "dire", "sentire", "guardare", "pensare"]
+```
