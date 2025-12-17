@@ -14,6 +14,8 @@ from nltk.corpus import wordnet as wn
 import matplotlib.pyplot as plt
 import nltk
 
+nltk.download("omw-1.4")
+
 nltk.download('wordnet')
 
 eng_nlp = spacy.load("en_core_web_sm")
@@ -132,11 +134,48 @@ ita_pairs
 ## 4. Semantics and WordNet
 
 ```{python}
-eng_verbs = ["run", "say", "feel", "look", "think"]
+wn.synsets("run", pos=wn.VERB)
+wn.synset("run.v.01").lemma_names("spa")
+wn.synset("run.v.01").lemma_names("ita")
+wn.synset("run.v.01").lemma_names("fin")
+```
 
-fin_verbs = ["juosta", "sanoa", "", "katso", "ajatella"]
+```{python}
+wn.synsets("say", pos=wn.VERB)
+wn.synset("state.v.01").lemma_names("spa")
+wn.synset("state.v.01").lemma_names("ita")
+wn.synset("state.v.01").lemma_names("fin")
+```
 
-spa_verbs = ["correr", "decir", "sentir", "mirar", "pensar"]
+```{python}
+wn.synsets("feel", pos=wn.VERB)
+wn.synset("feel.v.01").lemma_names("spa")
+wn.synset("feel.v.01").lemma_names("ita")
+wn.synset("feel.v.01").lemma_names("fin")
+```
 
-ita_verbs = ["correre", "dire", "sentire", "guardare", "pensare"]
+```{python}
+wn.synsets("look", pos=wn.VERB)
+wn.synset("look.v.01").lemma_names("spa")
+wn.synset("look.v.01").lemma_names("ita")
+wn.synset("look.v.01").lemma_names("fin")
+```
+
+```{python}
+wn.synsets("think", pos=wn.VERB)
+wn.synset("think.v.01").lemma_names("spa")
+wn.synset("think.v.01").lemma_names("ita")
+wn.synset("think.v.01").lemma_names("fin")
+```
+
+```{python}
+#multiple lemmas per word when necessary, hence why there are more than 5 items for spa, ita, and fin
+
+eng_verbs = ['run', 'say', 'feel', 'look', 'think']
+
+spa_verbs = ['correr', 'decir', 'manifestar', 'experimentar', 'sentir', 'mirar', 'observar', 'ver', 'considerar', 'creer', 'pensar']
+
+ita_verbs = ['correre', 'affermare', 'dichiarare', 'dire', 'enunciare', 'enunziare', 'raccontare', "sentire", "sentirsi", 'guardare', 'credere', 'pensare', 'ritenere']
+
+fin_verbs = ['juosta', 'kertoa', 'tuntea', 'kokea', 'katsoa', 'pitää']
 ```
