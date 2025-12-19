@@ -304,3 +304,69 @@ eng_adj_df = (
 eng_adj_df
 
 ```
+
+```{python}
+#Italian Adjectives 
+
+ita_doc = ita_nlp(ita)
+
+ita_adj_pairs = []
+
+for tok in ita_doc:
+    if tok.text.lower() == "alice":
+        adjs = [c for c in tok.children if c.dep_ == "amod" and c.pos_ == "ADJ"]
+        for adj in adjs:
+            ita_adj_pairs.append((adj.lemma_, tok.text))
+
+
+#df 
+
+first_ita_adj = [item[0] for item in ita_adj_pairs]
+
+ita_adj_counts = Counter(first_ita_adj)
+
+ita_adj_df = (
+    pd.DataFrame(ita_adj_counts.items(), columns=["Adj", "Frequency"])
+      .sort_values("Frequency", ascending=False)
+      .head(5)
+)
+
+ita_adj_df
+```
+
+```{python}
+#Finnish Adjectives 
+
+fin_doc = fin_nlp(fin)
+
+fin_adj_pairs = []
+
+for tok in fin_doc:
+    if tok.text.lower() == "liisa":
+        adjs = [c for c in tok.children if c.dep_ == "amod" and c.pos_ == "ADJ"]
+        for adj in adjs:
+            fin_adj_pairs.append((adj.lemma_, tok.text))
+
+
+#df 
+
+first_fin_adj = [item[0] for item in fin_adj_pairs]
+
+fin_adj_counts = Counter(first_fin_adj)
+
+fin_adj_df = (
+    pd.DataFrame(fin_adj_counts.items(), columns=["Adj", "Frequency"])
+      .sort_values("Frequency", ascending=False)
+      .head(5)
+)
+
+fin_adj_df
+```
+
+```{python}
+#summary chart
+
+adj_summary_df = pd.concat([spa_adj_df, eng_adj_df, fin_adj_df, ita_adj_df], axis=0)
+
+adj_summary_df
+```
