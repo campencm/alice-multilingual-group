@@ -179,3 +179,18 @@ ita_verbs = ['correre', 'affermare', 'dichiarare', 'dire', 'enunciare', 'enunzia
 
 fin_verbs = ['juosta', 'kertoa', 'tuntea', 'kokea', 'katsoa', 'pitää']
 ```
+
+### 4. Semantics & Wordnet
+
+```{python}
+cat_syn = wn.synset("cat.n.01")
+rabbit_syn = wn.synset("rabbit.n.01")
+
+feel_syn = wn.synset("feel.v.01")
+think_syn = wn.synset("think.v.01")
+
+cat_rabbit_wup = cat_syn.wup_similarity(rabbit_syn)
+feel_think_wup = feel_syn.wup_similarity(think_syn)
+
+cat_rabbit_wup, feel_think_wup
+```
