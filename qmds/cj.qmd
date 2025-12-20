@@ -66,7 +66,6 @@ eng_doc = eng_nlp(eng)
 
 eng_lemmas = [(t.lemma_.lower()) for t in eng_doc
                   if not (t.is_stop or t.is_punct or t.is_space or t.like_num)]
-eng_lemmas
                   
 #English Lemma Frequency
 freq_eng = Counter(eng_lemmas)
@@ -80,7 +79,6 @@ ita_doc = ita_nlp(ita)
 
 ita_lemmas = [(t.lemma_.lower()) for t in ita_doc
                   if not (t.is_stop or t.is_punct or t.is_space or t.like_num)]
-ita_lemmas
                   
 #Italian Lemma Frequency
 freq_ita = Counter(ita_lemmas)
@@ -94,7 +92,6 @@ fin_doc = fin_nlp(fin)
 
 fin_lemmas = [(t.lemma_.lower()) for t in fin_doc
                   if not (t.is_stop or t.is_punct or t.is_space or t.like_num)]
-fin_lemmas
                   
 #Finnish Lemma Frequency
 freq_fin = Counter(fin_lemmas)
@@ -108,7 +105,6 @@ spa_doc = spa_nlp(spa)
 
 spa_lemmas = [(t.lemma_.lower()) for t in spa_doc
                   if not (t.is_stop or t.is_punct or t.is_space or t.like_num)]
-spa_lemmas
                   
 #Spanish Lemma Frequency
 freq_spa = Counter(spa_lemmas)
@@ -230,4 +226,57 @@ ita_nouns = ["coniglio", "chiave", "duchessa", "gatto", "tè"]
 fin_nouns = ["kani", "avain", "herttuatar", "kissa", "tee"]
 
 spa_nouns = ["conejo", "llave", "duquesa", "gato", "té"]
+```
+
+```{python}
+def wordnet_info(word, lang):
+    data = []
+
+    for syn in wn.synsets(word, pos=wn.NOUN, lang=lang):
+        data.append({
+            "Word": word,
+            "Synset": syn.name(),
+            "Gloss": syn.definition(),
+            "Hypernyms": [h.name() for h in syn.hypernyms()]  })
+    return data
+```
+
+```{python}
+#English
+eng_data = []
+
+for w in eng_nouns:
+    eng_data.extend(wordnet_info(w, "eng"))
+eng_df = pd.DataFrame(eng_data)
+eng_df
+```
+
+```{python}
+#Italian
+ita_data = []
+
+for w in ita_nouns:
+    ita_data.extend(wordnet_info(w, "ita"))
+ita_df = pd.DataFrame(ita_data)
+ita_df
+```
+
+```{python}
+#Finnish
+fin_data = []
+
+for w in fin_nouns:
+    fin_data.extend(wordnet_info(w, "fin"))
+fin_df = pd.DataFrame(fin_data)
+fin_df
+```
+
+```{python}
+#Spanish
+spa_data = []
+
+for w in spa_nouns:
+    spa_data.extend(wordnet_info(w, "spa"))
+spa_df = pd.DataFrame(spa_data)
+spa_df
 ```
