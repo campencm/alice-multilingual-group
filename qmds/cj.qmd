@@ -280,3 +280,67 @@ for w in spa_nouns:
 spa_df = pd.DataFrame(spa_data)
 spa_df
 ```
+
+Wup Scores for nouns and verbs
+
+```{python}
+#English
+cat_syn = wn.synset("cat.n.01")
+rabbit_syn = wn.synset("rabbit.n.01")
+
+feel_syn = wn.synset("feel.n.01")
+think_syn = wn.synset("think.n.01")
+
+cat_rabbit_wup = cat_syn.wup_similarity(rabbit_syn)
+feel_think_wup = feel_syn.wup_similarity(think_syn)
+
+cat_rabbit_wup, feel_think_wup
+```
+
+```{python}
+#Italian nouns
+gatto_syn = wn.synsets("gatto", pos=wn.NOUN, lang="ita")[0]
+coniglio_syn = wn.synsets("coniglio", pos=wn.NOUN, lang="ita")[0]
+
+#Italian verbs
+sentire_syn = wn.synsets("sentire", pos=wn.VERB, lang="ita")[0]
+pensare_syn = wn.synsets("pensare", pos=wn.VERB, lang="ita")[0]
+
+#Wup Scores
+gatto_coniglio_wup = gatto_syn.wup_similarity(coniglio_syn)
+sentire_pensare_wup = sentire_syn.wup_similarity(pensare_syn)
+
+gatto_coniglio_wup, sentire_pensare_wup
+```
+
+```{python}
+#Finnish nouns
+kissa_syn = wn.synsets("kissa", pos=wn.NOUN, lang="fin")[0]
+kani_syn = wn.synsets("kani", pos=wn.NOUN, lang="fin")[0]
+
+#Finnish verbs
+tuntea_syn = wn.synsets("tuntea", pos=wn.VERB, lang="fin")[0]
+pitää_syn = wn.synsets("pitää", pos=wn.VERB, lang="fin")[0]
+
+#Wup Scores
+kissa_kani_wup = kissa_syn.wup_similarity(kani_syn)
+tuntea_pitää_wup = tuntea_syn.wup_similarity(pitää_syn)
+
+kissa_kani_wup, tuntea_pitää_wup
+```
+
+```{python}
+#Spanish nouns
+gato_syn = wn.synsets("gato", pos=wn.NOUN, lang="spa")[0]
+conejo_syn = wn.synsets("conejo", pos=wn.NOUN, lang="spa")[0]
+
+#Spanish verbs
+sentir_syn = wn.synsets("sentir", pos=wn.VERB, lang="spa")[0]
+pensar_syn = wn.synsets("pensar", pos=wn.VERB, lang="spa")[0]
+
+#Wup Scores
+gato_conejo_wup = gato_syn.wup_similarity(conejo_syn)
+sentir_pensar_wup = sentir_syn.wup_similarity(pensar_syn)
+
+gato_conejo_wup, sentir_pensar_wup
+```
